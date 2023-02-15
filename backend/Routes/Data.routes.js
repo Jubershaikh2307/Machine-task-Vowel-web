@@ -14,7 +14,7 @@ product.post("/add", async (req, res) => {
     const { title, description, price, category, images } = req.body
     const new_data = new DataModel({ title, description, price, category, images })
     await new_data.save()
-    res.send({ "responce": "1", "desc": "Product Successfull Added" })
+    res.send({ "responce": "1", "desc": "Product Successfull Retrive" })
 })
 
 product.post("/add", async (req, res) => {

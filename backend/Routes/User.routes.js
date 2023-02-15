@@ -4,9 +4,10 @@ const UserModel = require('../Models/User.models');
 
 const user = express()
 
-user.get("/",async (req, res) => {
-    const {email} = req.query
+user.get("/:email",async (req, res) => {
+    const {email} = req.params
     const user = await UserModel.findOne({ email }).select("-password")
+    console.log(user);
     res.send(user)
 })
 
