@@ -1,52 +1,39 @@
 const express = require('express')
 const bcrypt = require('bcrypt');
-const UserModel = require('../Models/User.models');
+const DataModel = require('../Models/Data.model');
 
-const user = express()
 
-user.get("/",async (req, res) => {
-    const {email} = req.query
-    const user = await UserModel.findOne({ email }).select("-password")
-    res.send(user)
+const product = express()
+
+product.get("/", async (req, res) => {
+    const data = await DataModel.find()
+    res.send(data)
 })
 
-user.post("/login",async (req, res) => {
-    const { email, password } = req.body
-
-    try {
-        const user = await UserModel.findOne({ email })
-        const verified = bcrypt.compareSync(password, user.password);
-        if(verified){
-            return res.send({responce:1,role:user.role})
-        }else{
-            return res.send({responce:-1,role:user.role});
-        }
-    } catch (error) {
-        return res.send({error:error});
-    }
-
+product.post("/add", async (req, res) => {
+    const { title, description, price, category, images } = req.body
+    const new_data = new DataModel({ title, description, price, category, images })
+    await new_data.save()
+    res.send({ "responce": "1", "desc": "Product Successfull Added" })
 })
 
-user.post("/signup", async (req, res) => {
-    const { name, email, password, role } = req.body
-
-    let check = await UserModel.find({ email }).exec()
-
-    if (check.length == 0) {
-        const passwordHash = bcrypt.hashSync(password, 10);
-        const new_user = new UserModel({
-            name,
-            email,
-            password: passwordHash,
-            role
-        })
-        console.log(new_user);
-        await new_user.save()
-        res.send({"responce":"1","desc":"User Successfull Added"})
-    }else{
-        res.send({"responce":"-2","desc":"User Already Exist"})
-    }
-
+product.post("/add", async (req, res) => {
+    const { title, description, price, category, images } = req.body
+    const new_data = new DataModel({ title, description, price, category, images })
+    await new_data.save()
+    res.send({ "responce": "1", "desc": "Product Successfull Added" })
 })
 
-module.exports = user
+product.delete("/delete/:id", async (req, res) => {
+    const { id } = req.params
+    await DataModel.deleteOne({ id })
+    res.send({ "responce": "1", "desc": "Product Successfull Deleted" })
+})
+
+product.patch("/update/:id", async (req, res) => {
+    const { title, description, price, category, images } = req.body
+    await DataModel.updateOne({ title, description, price, category, images })
+    res.send({ "responce": "1", "desc": "Product Successfull Update" })
+})
+
+module.exports = product

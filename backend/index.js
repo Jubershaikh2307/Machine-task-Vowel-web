@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const user = require('./Routes/User.routes');
 const connection = require('./config/db');
+const product = require('./Routes/Data.routes');
 
 const app = express()
 
@@ -16,6 +17,8 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/user",user)
+
+app.use("/product",product)
 
 app.listen(PORT,()=>{
     try{
