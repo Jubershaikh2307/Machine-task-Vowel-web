@@ -4,26 +4,31 @@ const UserModel = require('../Models/User.models');
 
 const user = express()
 
-user.get("/:email",async (req, res) => {
-    const {email} = req.params
+user.get("/:email", async (req, res) => {
+    const { email } = req.params
     const user = await UserModel.findOne({ email }).select("-password")
     console.log(user);
     res.send(user)
 })
 
-user.post("/login",async (req, res) => {
+user.post("/login", async (req, res) => {
     const { email, password } = req.body
 
     try {
         const user = await UserModel.findOne({ email })
-        const verified = bcrypt.compareSync(password, user.password);
-        if(verified){
-            return res.send({responce:1,role:user.role})
+        if (user) {
+            const verified = bcrypt.compareSync(password, user.password);
+            if (verified) {
+                return res.send({ responce: 1, role: user.role ,id:user._id})
+            } else {
+                return res.send({ responce: -1, role: user.role });
+            }
         }else{
-            return res.send({responce:-1,role:user.role});
+            return res.send({ responce: 0})
         }
+
     } catch (error) {
-        return res.send({error:error});
+        return res.send({ error: error });
     }
 
 })
@@ -43,9 +48,9 @@ user.post("/signup", async (req, res) => {
         })
         console.log(new_user);
         await new_user.save()
-        res.send({"responce":"1","desc":"User Successfull Added"})
-    }else{
-        res.send({"responce":"-2","desc":"User Already Exist"})
+        res.send({ "responce": "1", "desc": "User Successfull Added" })
+    } else {
+        res.send({ "responce": "-2", "desc": "User Already Exist" })
     }
 
 })
