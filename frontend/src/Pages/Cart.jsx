@@ -33,7 +33,7 @@ const Cart = () => {
         let userid = JSON.parse(localStorage.getItem("userid"))
         // console.log(userid);
         if (userid) {
-            axios.get("http://localhost:3001/cart/" + userid.id)
+            axios.get("https://vowelweb-luat.onrender.com/cart/" + userid.id)
                 .then((res) => {
                     // console.log(res.data);
                     setproduct(res.data)
@@ -54,7 +54,7 @@ const Cart = () => {
             user_id: userid.id,
             product_id: id
         }
-        axios.post("http://localhost:3001/cart/add", obj)
+        axios.post("https://vowelweb-luat.onrender.com/cart/add", obj)
             .then((res) => {
                 console.log(res.data);
             }).catch((err) => {
@@ -68,7 +68,7 @@ const Cart = () => {
             user_id: userid.id,
             product_id: id
         }
-        axios.patch("http://localhost:3001/cart/update/" + uid, obj)
+        axios.patch("https://vowelweb-luat.onrender.com/cart/update/" + uid, obj)
             .then((res) => {
                 console.log(res.data);
             }).catch((err) => {
@@ -77,7 +77,7 @@ const Cart = () => {
     }
 
     const removecart = (id) => {
-        axios.delete("http://localhost:3001/cart/delete/" + id)
+        axios.delete("https://vowelweb-luat.onrender.com/cart/delete/" + id)
             .then((res) => {
                 console.log(res.data);
             }).catch((err) => {

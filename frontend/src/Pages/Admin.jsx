@@ -39,7 +39,7 @@ const Admin = () => {
     const finalRef = React.useRef(null)
 
     useEffect(() => {
-        axios.get("http://localhost:3001/product")
+        axios.get("https://vowelweb-luat.onrender.com/product")
             .then((res) => {
                 setproduct(res.data)
                 setisLoading(false)
@@ -50,7 +50,7 @@ const Admin = () => {
     }, [product])
 
     const remove = (id) => {
-        axios.delete("http://localhost:3001/product/delete/" + id).then((res) => {
+        axios.delete("https://vowelweb-luat.onrender.com/product/delete/" + id).then((res) => {
 
         }).catch((err) => {
             console.log(err);
@@ -61,7 +61,7 @@ const Admin = () => {
         let obj = {
 
         }
-        axios.patch("http://localhost:3001/product/update/" + id, obj).then((res) => {
+        axios.patch("https://vowelweb-luat.onrender.com/product/update/" + id, obj).then((res) => {
 
         }).catch((err) => {
             console.log(err);

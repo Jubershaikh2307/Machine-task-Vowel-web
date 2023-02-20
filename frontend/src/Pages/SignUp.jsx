@@ -44,7 +44,7 @@ const SignUp = () => {
                 password: password,
                 role:role
             }
-            axios.post("http://localhost:3001/user/signup", obj)
+            axios.post("https://vowelweb-luat.onrender.com/user/signup", obj)
                 .then((res) => {
                     console.log(res);
                     if(res.data.responce == 1){

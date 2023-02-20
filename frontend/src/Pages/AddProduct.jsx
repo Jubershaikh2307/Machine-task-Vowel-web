@@ -32,7 +32,7 @@ const AddProduct = () => {
                 category,
                 images:arr
             }
-            axios.post("http://localhost:3001/product/add",obj).then((res)=>{
+            axios.post("https://vowelweb-luat.onrender.com/product/add",obj).then((res)=>{
                 alert("Added Successfully")
             }).catch((err)=>{
                 console.log(err);

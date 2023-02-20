@@ -28,7 +28,7 @@ const Login = () => {
                 email,
                 password
             }
-            axios.post("http://localhost:3001/user/login",obj)
+            axios.post("https://vowelweb-luat.onrender.com/user/login",obj)
             .then((res)=>{
                 if(res.data.responce == 1 && res.data.role=="user"){
                     let data = {

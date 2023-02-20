@@ -22,7 +22,7 @@ const Landingpage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:3001/product")
+        axios.get("https://vowelweb-luat.onrender.com/product")
             .then((res) => {
                 setproduct(res.data)
                 setisLoading(false)
@@ -39,7 +39,7 @@ const Landingpage = () => {
                 user_id: userid.id,
                 product_id: id
             }
-            axios.post("http://localhost:3001/cart/add", obj)
+            axios.post("https://vowelweb-luat.onrender.com/cart/add", obj)
                 .then((res) => {
                     console.log(res.data);
                 }).catch((err) => {
